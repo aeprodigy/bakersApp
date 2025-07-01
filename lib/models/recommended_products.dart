@@ -10,7 +10,7 @@ class RecommendedProducts {
   final double rating;
   final String image;
 
-  //constructor
+  //constructor:ensures that the object starts in a consistent and predictable state[creates objects and a new isntance]
   RecommendedProducts({
     required this.id,
     required this.name,
@@ -21,7 +21,7 @@ class RecommendedProducts {
     required this.kitchenName,
   });
 
-  //deserialize data
+  //deserialize data{convert the class object to a json string}
   factory RecommendedProducts.fromJson(Map<String, dynamic> json) {
     return RecommendedProducts(
       id: json['id'],
@@ -48,7 +48,7 @@ class RecommendedProducts {
   //list of recommended products
   static List<RecommendedProducts> recommendedProducts = [
     RecommendedProducts(
-      id: "1",
+      id: "7",
       name: "Blue",
       location: "location",
       image: 'assets/cakes.jpg',
@@ -58,7 +58,7 @@ class RecommendedProducts {
     ),
 
     RecommendedProducts(
-      id: "2",
+      id: "8",
       name: "Cakez ",
       location: "location",
       image: 'assets/cakes_2.jpg',
@@ -68,7 +68,7 @@ class RecommendedProducts {
     ),
 
     RecommendedProducts(
-      id: "1",
+      id: "9",
       name: "Choco",
       location: "location",
       image: 'assets/cakes_3.jpg',

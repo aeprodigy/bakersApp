@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             // Recommended products title
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
@@ -108,9 +108,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
             //list view of recommended products
             ListView.builder(
-              shrinkWrap: true, // ✅ Constrain height to only what's needed
+              shrinkWrap: true, // Constrain height to only what's needed
               physics:
-                  NeverScrollableScrollPhysics(), // ✅ Disable internal scrolling
+                  NeverScrollableScrollPhysics(), // Disable internal scrolling
               itemCount: recommendedProds.length,
               itemBuilder: (context, index) {
                 final recProduct = recommendedProds[index];

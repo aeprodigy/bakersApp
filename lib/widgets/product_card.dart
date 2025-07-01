@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_app/models/cart_items.dart';
 import 'package:food_app/models/product.dart';
+import 'package:food_app/providers/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -9,6 +12,9 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //provider
+    final cartProvider = Provider.of<CartProvider>(context);
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -28,7 +34,7 @@ class ProductCard extends StatelessWidget {
               child: Image.asset(
                 product.image,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
           ),
@@ -58,18 +64,28 @@ class ProductCard extends StatelessWidget {
                       ],
                     ),
                     //button
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(16),
+                    GestureDetector(
+                      onTap: () => cartProvider.addItem(
+                        CartItem(
+                          id: product.id,
+                          name: product.name,
+                          price: product.price,
+                          image: product.image,
+                        ),
                       ),
-                      child: Center(
-                        child: FaIcon(
-                          FontAwesomeIcons.plus,
-                          color: Colors.white,
-                          size: 12,
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.plus,
+                            color: Colors.white,
+                            size: 12,
+                          ),
                         ),
                       ),
                     ),

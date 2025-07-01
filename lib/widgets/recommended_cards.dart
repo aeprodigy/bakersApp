@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/models/cart_items.dart';
 import 'package:food_app/models/recommended_products.dart';
+import 'package:food_app/providers/cart_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:provider/provider.dart';
 
 class RecommendedCards extends StatelessWidget {
   final RecommendedProducts recProducts;
@@ -9,6 +12,8 @@ class RecommendedCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //provider for the cart items and the  recommdedd
+    final recProviders = Provider.of<CartProvider>(context);
     return Container(
       height: 150,
       width: double.infinity,
@@ -26,6 +31,7 @@ class RecommendedCards extends StatelessWidget {
               recProducts.image,
               height: double.infinity,
               width: 200,
+              fit:BoxFit.contain,
             ),
           ),
           Expanded(
@@ -121,33 +127,42 @@ class RecommendedCards extends StatelessWidget {
                       ),
                       SizedBox(width: 20),
                       //add button
-                      Container(
-                        width: 80,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(16),
+                      GestureDetector(
+                        onTap: ()=> recProviders.addItem(
+                          CartItem(
+                            id: recProducts.id, 
+                            name: recProducts.name, 
+                            price: recProducts.price, 
+                            image: recProducts.image)
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            //icon
-                            Icon(
-                              LucideIcons.plus,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            SizedBox(width: 8),
-                            //text
-                            Text(
-                              'Add',
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.roboto(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300,
+                        child: Container(
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              //icon
+                              Icon(
+                                LucideIcons.plus,
                                 color: Colors.white,
+                                size: 20,
                               ),
-                            ),
-                          ],
+                              SizedBox(width: 8),
+                              //text
+                              Text(
+                                'Add',
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

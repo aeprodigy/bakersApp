@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/screens/home_screen.dart';
+import 'package:food_app/providers/cart_provider.dart';
 import 'package:food_app/widgets/bottom_navigation_bar.dart';
+import 'package:provider/provider.dart';
 void main() {
   //providers
-  runApp(const MyApp());
+  runApp(
+    //providers
+    MultiProvider(
+      providers: [
+        //cart provider
+        //this provider will be used to manage the cart items 
+        ChangeNotifierProvider(create: (_)=>CartProvider(),)
+      ],
+      child: const MyApp()
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
